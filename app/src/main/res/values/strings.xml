@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">XLauncher</string>
+    <string name="accessibility_service_description">XLauncher need accessibility permission to lock the screen</string>
+</resources>
