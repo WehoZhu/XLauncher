@@ -1,3 +1,4 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
 package com.wayne.xlauncher.ui.theme
 
 import androidx.compose.material3.Typography

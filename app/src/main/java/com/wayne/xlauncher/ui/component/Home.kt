@@ -1,3 +1,4 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
 package com.wayne.xlauncher.ui.component
 
 import android.app.Activity
@@ -59,7 +60,7 @@ import androidx.compose.ui.unit.sp
 import com.wayne.xlauncher.MainViewModel
 import com.wayne.xlauncher.data.AppItem
 import com.wayne.xlauncher.util.UITool
-import com.wayne.xlauncher.util.onItemClick
+import com.wayne.xlauncher.util.jumpToApp
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -68,6 +69,8 @@ fun Home(viewModel: MainViewModel) {
     val insets = WindowInsets.safeContent
     val pageState = rememberPagerState()
     val showAppPopup = viewModel.showAppPopup.observeAsState()
+    val showPatternDialog = viewModel.showPatternDialog.observeAsState()
+    val activity = LocalContext.current as Activity
 
     LaunchedEffect(pageState) {
         snapshotFlow { pageState.currentPageOffsetFraction }.collect { f ->
@@ -115,6 +118,12 @@ fun Home(viewModel: MainViewModel) {
             AppPopup(
                 viewModel = viewModel,
                 onDismissRequest = { viewModel.toggleAppPopup(false, null, null) })
+
+        if (showPatternDialog.value == true)
+            PatternDialog(
+                onDismissRequest = { viewModel.togglePatternDialog(false) },
+                onPatternConfirmed = { viewModel.onPatternConfirmed(it, activity) }
+            )
     }
 }
 
@@ -149,7 +158,7 @@ fun HotSeats(viewModel: MainViewModel) {
                         .clickable(
                             interactionSource = interactionSource, indication = null
                         ) {
-                            onItemClick(it, activity)
+                            jumpToApp(it, activity)
                         }) {
                         Image(
                             bitmap = drawableToBitmap(it.icon!!),
@@ -179,7 +188,7 @@ fun AppCell(item: AppItem, viewModel: MainViewModel) {
                     viewModel.toggleAppPopup(true, position, item)
                 },
                 onTap = {
-                    onItemClick(item, activity)
+                    jumpToApp(item, activity)
                 }
             )
         }) {

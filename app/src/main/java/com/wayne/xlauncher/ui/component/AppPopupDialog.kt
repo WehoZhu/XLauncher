@@ -1,3 +1,4 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
 package com.wayne.xlauncher.ui.component
 
 import android.app.Activity
@@ -46,7 +47,7 @@ fun AppPopup(onDismissRequest: () -> Unit, viewModel: MainViewModel) {
     val yOffset = (if (showDown) iconSizePx / 2 + UITool.dp2Pixel(10)
     else -iconSizePx / 2 - dialogHeightPx).toInt()
 
-    val isLeft = viewModel.dialogPopLeft.observeAsState()
+    val isLeft = viewModel.appInfoDialogPopLeft.observeAsState()
     val xOffset = if(isLeft.value == true) (-iconSizePx / 2).toInt() else (-iconSizePx).toInt()
 
     val activity = LocalContext.current as Activity
@@ -112,7 +113,11 @@ fun AppPopup(onDismissRequest: () -> Unit, viewModel: MainViewModel) {
                     )
                     Box(
                         modifier = Modifier
-                            .size(width = 46.dp, height = 36.dp),
+                            .size(width = 46.dp, height = 36.dp)
+                            .clickable {
+                                viewModel.togglePatternDialog(true)
+                                //onDismissRequest()
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -127,4 +132,3 @@ fun AppPopup(onDismissRequest: () -> Unit, viewModel: MainViewModel) {
         }
     }
 }
-

@@ -1,3 +1,4 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
 package com.wayne.xlauncher.ui.component
 
 import androidx.compose.animation.AnimatedVisibility
@@ -7,6 +8,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -72,7 +74,10 @@ fun PagerIndicator(viewModel: MainViewModel) {
                 .height(24.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(Color.DarkGray.copy(alpha = 0.55f))
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 16.dp)
+                .clickable {
+                    viewModel.togglePatternDialog(true)
+                },
             contentAlignment = Alignment.Center
         ) {
             Image(

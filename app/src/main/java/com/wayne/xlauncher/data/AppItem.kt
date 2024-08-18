@@ -1,3 +1,5 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
+
 package com.wayne.xlauncher.data
 
 import android.graphics.drawable.Drawable

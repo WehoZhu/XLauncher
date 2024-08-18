@@ -1,3 +1,4 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
 package com.wayne.xlauncher.service
 
 import android.accessibilityservice.AccessibilityService

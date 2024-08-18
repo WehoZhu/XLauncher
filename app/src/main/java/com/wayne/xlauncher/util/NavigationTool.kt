@@ -1,3 +1,4 @@
+/* © 2024 Wayne Zhu. All rights reserved. */
 package com.wayne.xlauncher.util
 
 import android.annotation.SuppressLint
@@ -10,7 +11,7 @@ import com.wayne.xlauncher.service.LockScreenService
 
 
 @SuppressLint("InvalidWakeLockTag")
-fun onItemClick(item: AppItem, activity: Activity) {
+fun jumpToApp(item: AppItem, activity: Activity) {
     if (item.packageName.isEmpty()) {
         item.deepLink?.let {
             if (it == "lock:") {
@@ -36,4 +37,3 @@ fun onItemClick(item: AppItem, activity: Activity) {
     val i = activity.packageManager.getLaunchIntentForPackage(item.packageName)
     activity.startActivity(i)
 }
-

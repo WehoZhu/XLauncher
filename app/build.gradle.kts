@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -36,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    kotlin {
+        jvmToolchain(8)
+    }
     buildFeatures {
         compose = true
     }
@@ -50,6 +54,7 @@ android {
 }
 
 dependencies {
+    val roomVersion = "2.4.0"
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.2")
@@ -67,4 +72,8 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    ksp("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
 }
