@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -104,8 +105,12 @@ fun Home(viewModel: MainViewModel) {
                         .fillMaxSize()
                         .padding(horizontal = 12.dp)
                 ) {
-                    items(data.value!![page].size) { i ->
-                        AppCell(data.value!![page][i], viewModel)
+                    items(data.value!![page],
+                        key = { appItem ->
+                            appItem.packageName + appItem.name
+                        }
+                    ) { i ->
+                        AppCell(i, viewModel)
                     }
                 }
             }
